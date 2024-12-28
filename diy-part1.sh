@@ -67,17 +67,19 @@ git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 
 
 
-git clone https://github.com/haiibo/openwrt-packages
-shopt -s extglob
-rm -rf openwrt-packages/!(luci-app-netdata|luci-app-smartdns|luci-app-upnp)
-cp -r openwrt-packages/{luci-app-netdata,luci-app-smartdns,luci-app-upnp} package/
-rm -rf openwrt-packages
-
-#git clone https://github.com/coolsnowwolf/luci luci1
+#git clone https://github.com/haiibo/openwrt-packages
 #shopt -s extglob
-#rm -rf luci1/applications/!(luci-app-autoreboot)
-#cp -r luci1/applications/luci-app-autoreboot package/
-#rm -rf luci1
+#rm -rf openwrt-packages/!(luci-app-netdata|luci-app-smartdns|luci-app-upnp)
+#cp -r openwrt-packages/{luci-app-netdata,luci-app-smartdns,luci-app-upnp} package/
+#rm -rf openwrt-packages
+
+rm -rf feeds/luci/applications/luci-app-ddns
+
+git clone -b openwrt-23.05 https://github.com/coolsnowwolf/luci luci1
+shopt -s extglob
+rm -rf luci1/applications/!(luci-app-autoreboot|luci-app-ddns)
+cp -r luci1/applications/luci-app-autoreboot package/
+rm -rf luci1
 
 
 #删除feeds自带mosdns、v2ray-geodata
