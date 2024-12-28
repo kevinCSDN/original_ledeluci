@@ -22,24 +22,6 @@
 
 sed -i '1i src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
-sed -i 's|^src-git luci https://git.openwrt.org/project/luci.git|#src-git luci https://git.openwrt.org/project/luci.git|' feeds.conf.default
-
-# 2. 在 feeds.conf.default 中添加新的 GitHub 地址，仅影响 luci-app-firewall 和 luci-app-ddns
-echo 'src-git luci https://github.com/coolsnowwolf/luci.git;openwrt-23.05' >> feeds.conf.default
-
-# 3. 删除原有的 luci-app-firewall 和 luci-app-ddns 包
-./scripts/feeds uninstall luci-app-firewall
-./scripts/feeds uninstall luci-app-ddns
-
-# 4. 更新 feeds 列表以包含新的 GitHub 源
-./scripts/feeds update luci
-
-# 5. 安装从 GitHub 拉取的 luci-app-firewall 和 luci-app-ddns
-./scripts/feeds install luci-app-firewall
-./scripts/feeds install luci-app-ddns
-
-# 6. 安装其他 luci 包（这些包仍从 https://git.openwrt.org/project/luci.git 拉取）
-./scripts/feeds install -a
 
 ./scripts/feeds update -a && rm -rf feeds/luci/applications/luci-app-mosdns
 rm -rf feeds/packages/net/{alist,adguardhome,mosdns,xray*,v2ray*,v2ray*,sing*,smartdns}
