@@ -129,12 +129,13 @@ jobs:
         rm -rf package/feeds/luci/luci-app-firewall
         rm -rf package/feeds/luci/luci-app-ddns
         
-        # 从 coolsnowwolf 的 repo 克隆这两个包
-        git clone https://github.com/coolsnowwolf/luci.git package/luci-app-firewall
-        git clone https://github.com/coolsnowwolf/luci.git package/luci-app-ddns
+        # 从 coolsnowwolf 的 repo 克隆这两个包，并指定分支为 openwrt-23.05
+        git clone --single-branch --branch openwrt-23.05 https://github.com/coolsnowwolf/luci.git package/luci-app-firewall
+        git clone --single-branch --branch openwrt-23.05 https://github.com/coolsnowwolf/luci.git package/luci-app-ddns
 
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a -f
+
 
 
     - name: Openwrt AutoUpdate
